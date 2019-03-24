@@ -22,7 +22,8 @@
 	  $(document).on('scroll', function(){
 		var scrollPos = $(this).scrollTop();
 		$('.parallax-fade-top').css({
-		  'top' : (scrollPos/2)+'px'
+		  'top' : (scrollPos/2)+'px',
+		  'opacity' : 1-(scrollPos/650)
 		});
 	  });    
 	}
@@ -70,67 +71,6 @@
 		//Parallax
 		
 		$('.parallax').parallax("50%", 0.3);
-
-		
-		/* Testimonials Carousel */		
-		
-		$("#owl-testimonials-1").owlCarousel({
-			transitionStyle : "goDown",
-			singleItem: true, 
-			itemsMobile : false, 
-			pagination : false,
-			autoPlay : 5000,
-			slideSpeed : 300
-		});	
-		(function ($) { 
-			var owl = $("#owl-testimonials-1");
-			owl.owlCarousel();	
-			
-			// Custom Navigation Events
-			$(".next-testimonials-1").click(function(){
-				owl.trigger('owl.next');
-			})
-			$(".prev-testimonials-1").click(function(){
-				owl.trigger('owl.prev');
-			})	
-		} )(jQuery);
-		
-		
-		/* Progress Bar Animation */	
-		
-		$(function() {   
-			var $meters = $(".progress > .progress-bar");
-			var $section = $('#progress');
-			var $queue = $({});
-			
-			function loadDaBars() {
-						$(".progress > .progress-bar").each(function() {
-							$(this)
-								.data("origWidth", $(this).width())
-								.width(0)
-								.animate({
-									width: $(this).data("origWidth")
-								}, 2000);
-						});
-			}    
-			$(document).bind('scroll.myScroll', function(ev) {
-				var scrollOffset = $(document).scrollTop();
-				var containerOffset = $section.offset().top - window.innerHeight;
-				if (scrollOffset > containerOffset) {
-					loadDaBars();
-					// unbind event not to load scroll again
-					$(document).unbind('.myScroll');
-				}
-			});    
-		});	
-	
-	
-		// Progress Counter 
-	
-		$('.counter').counterUp({
-			delay: 20,
-			time: 2000
-		});
 		
 		
 		/* Video */

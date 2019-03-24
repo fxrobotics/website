@@ -1,7 +1,6 @@
 (function($) { "use strict";
 
 
-	
 	//Preloader
 
 	Royal_Preloader.config({
@@ -23,7 +22,8 @@
 	  $(document).on('scroll', function(){
 		var scrollPos = $(this).scrollTop();
 		$('.parallax-fade-top').css({
-		  'top' : (scrollPos/2.4)+'px'
+		  'top' : (scrollPos/2)+'px',
+		  'opacity' : 1-(scrollPos/850)
 		});
 	  });    
 	}
@@ -43,7 +43,7 @@
 			var parts = full_url.split("#");
 			var trgt = parts[1];
 			var target_offset = $("#"+trgt).offset();
-			var target_top = target_offset.top - 67;
+			var target_top = target_offset.top - 64;
 
 			$('html, body').animate({scrollTop:target_top}, 800);
 		});
@@ -66,34 +66,50 @@
 			jQuery('html, body').animate({scrollTop: 0}, duration);
 			return false;
 		})
-	
-	
-		// Facts Counter 
-	
-		$('.counter-numb').counterUp({
-			delay: 20,
-			time: 2000
+
+		
+		/* Hero Carousel */		
+		
+		$("#owl-hero-1").owlCarousel({
+			transitionStyle : "goDown",
+			singleItem: true, 
+			itemsMobile : false, 
+			pagination : true,
+			autoPlay : 6000,
+			slideSpeed : 400
 		});	
+		(function ($) { 
+			var owl = $("#owl-hero-1");
+			owl.owlCarousel();	
+			
+			// Custom Navigation Events
+			$(".next-hero-1").click(function(){
+				owl.trigger('owl.next');
+			})
+			$(".prev-hero-1").click(function(){
+				owl.trigger('owl.prev');
+			})	
+		} )(jQuery);
 		
 		
 		//Parallax
 		
 		$('.parallax').parallax("50%", 0.3);
+		$('.parallax-1').parallax("50%", 0.3);
 		
 		
-		/* Work Carousel */		
+		/* Team Carousel */		
 		
-		$("#owl-work").owlCarousel({
-			items : 4,
-			itemsDesktop : [1500,3], 
+		$("#owl-team").owlCarousel({
+			items : 3,
+			itemsDesktop : [1350,3], 
 			itemsDesktopSmall : [1000,2],
-			itemsTablet: [768,1], 
+			itemsTablet: [600,1], 
 			itemsMobile : false, 
-			pagination : false,
-			rewindSpeed : 1400,
-			autoPlay : 3000,
-			slideSpeed : 400
-		});
+			pagination : true,
+			autoPlay : 8000,
+			slideSpeed : 300
+		});	
 		
 		
 		/* Video */
@@ -144,7 +160,7 @@
 					postWidth = Math.floor(winWidth / columnNumb);
 
 			}			
-			$('.grid-filter .filter a').on('click', function () { 
+			$('.grid-filter .filter a').click(function () { 
 				var selector = $(this).attr('data-filter');
 				
 				$(this).parent().parent().find('a').removeClass('current');

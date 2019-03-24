@@ -115,10 +115,10 @@ mark,
 	background-color: #6dc234;
 }
 .services-box-1 .icon-in-box {
-	box-shadow: 0px 5px 25px 0px rgba(109, 194, 52, .3);
+	box-shadow: 0 5px 25px 0 rgba(109, 194, 52, .3);
 }
 .services-box-1:hover .icon-in-box {
-	box-shadow: 0px 20px 35px 0px rgba(109, 194, 52, .4);
+	box-shadow: 0 20px 35px 0 rgba(109, 194, 52, .4);
 }
 .navbar-light .navbar-nav .nav-link.mPS2id-highlight{
 	background-color: rgba(109, 194, 52, 0.8) !important;
@@ -127,7 +127,7 @@ mark,
 	background-color: rgba(109,194,52,.3);
 }
 .call-box-5{
-	border: 5px solid #6dc234; 
+	border: 5px solid #6dc234;
 }
 .next-testimonials:hover,
 .prev-testimonials:hover{
@@ -148,7 +148,7 @@ mark,
 }
 .blockquote-reverse{
 	border-right: 0.4rem solid #6dc234;
-}  
+}
 .fancybox-thumbs > ul > li:before {
     border: 4px solid #6dc234;
 }
@@ -208,7 +208,8 @@ figure.vimeo a:before, figure.youtube a:before {
 figure.vimeo:hover a:after, figure.youtube:hover a:after {
 	background:#6dc234;
 }
-@keyframes "blink" {
+
+@keyframes blink {
   from, to {
     color: transparent;
   }
@@ -224,7 +225,7 @@ figure.vimeo:hover a:after, figure.youtube:hover a:after {
 	color: #6dc234;
   }
 }
-@-webkit-keyframes "blink" {
+@-webkit-keyframes blink {
   from, to {
     color: transparent;
   }
@@ -232,7 +233,7 @@ figure.vimeo:hover a:after, figure.youtube:hover a:after {
 	color: #6dc234;
   }
 }
-@-ms-keyframes "blink" {
+@-ms-keyframes blink {
   from, to {
     color: transparent;
   }
@@ -240,7 +241,7 @@ figure.vimeo:hover a:after, figure.youtube:hover a:after {
 	color: #6dc234;
   }
 }
-@-o-keyframes "blink" {
+@-o-keyframes blink {
   from, to {
     color: transparent;
   }

@@ -14,21 +14,16 @@ const html = () => gulp.src('./*.html')
   .pipe(htmlmin({collapseWhitespace: true, removeComments:true}))
   .pipe(gulp.dest('./dist/'));
 
-const styles = () => gulp.src('./assets/css/*.css')
+const styles = () => gulp.src('./css/*.css')
   .pipe(cleanCSS({debug: true, level: {1: {specialComments: 0}}}, (details) => {
     console.log(`${details.name}: ${details.stats.originalSize}`);
     console.log(`${details.name}: ${details.stats.minifiedSize}`);
   }))
   // .pipe(concat('vendor.min.css'))
-  .pipe(gulp.dest('./dist/assets/css/'));
+  .pipe(gulp.dest('./dist/css/'));
 
-const files = [
-  'assets/js/custom.js',
-  'assets/js/gmap.js'
-];
-
-const min = () => gulp.src(['./assets/js/*.js'])
-  .pipe(ignore.exclude([ "**/*.map", ...files ]))
+const min = () => gulp.src(['./js/*.js'])
+  .pipe(ignore.exclude([ "**/*.map", './js/custom/**' ]))
   .pipe(minify({
     ext: {
       src: '-debug.js',
@@ -36,24 +31,25 @@ const min = () => gulp.src(['./assets/js/*.js'])
     }
   }))
   // .pipe(concat("app.min.js"))
-  .pipe(gulp.dest('./dist/assets/js/'));
+  .pipe(gulp.dest('./dist/js/'));
 
-const copyAll = () => gulp.src(['./assets/**']).pipe(gulp.dest('dist/assets/'));
-const copyOther = () => gulp.src(['./*.xml', './*.txt', './*.ico']).pipe(gulp.dest('./dist/'));
+const copyAll = () => gulp.src(['./img/**']).pipe(gulp.dest('dist/img/'));
+const copyFonts = () => gulp.src(['./fonts/**']).pipe(gulp.dest('dist/fonts/'));
+const copyOther = () => gulp.src(['./*.xml', './*.txt', './*.ico', './*.png']).pipe(gulp.dest('./dist/'));
 
 gulp.task("watcher", function () {
   gulp.watch(
-    ["./assets/css/*.css"], gulp.series(styles));
+    ["./css/*.css"], gulp.series(styles));
   gulp.watch(
-    ["./assets/js/*.js"], gulp.series(min, main));
-  // gulp.watch(
-  //   ["./*.html"], gulp.series("upload"));
+    ["./js/*.js"], gulp.series(min, main));
+  gulp.watch(
+    ["./*.html"], gulp.series(html));
 });
 
-const main = () => gulp.src(files)
+const main = () => gulp.src(['./js/custom/**'])
   .pipe(babel())
   .pipe(uglify())
-  .pipe(gulp.dest('./dist/js/'));
+  .pipe(gulp.dest('./dist/js/custom/'));
 
-const build = gulp.series(copyAll, html, copyOther, styles, min);
+const build = gulp.series(copyAll, copyFonts, html, copyOther, styles, min, main);
 gulp.task('default', build);
