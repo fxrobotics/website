@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo rm -rf ./dist
+gulp
+node ./utils/buster.js
+rsync -rv ./dist/* signafide-1:signafide-landing/ --delete
+ssh signafide-1 "sudo rm -r /var/www/cloud/* && sudo cp -r /home/zack/signafide-landing/* /var/www/cloud/"

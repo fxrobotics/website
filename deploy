@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sudo rm -r ./dist
+gulp
+node ./utils/buster.js
+aws s3 sync ./dist/ s3://www.signafide.com/ --delete
+echo "Invalidating html files..."
+aws cloudfront create-invalidation --distribution-id E1LXM8550IJVXG \
+  --paths "/*"
