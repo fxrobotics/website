@@ -14,6 +14,10 @@ const html = () => gulp.src('./*.html')
   .pipe(htmlmin({collapseWhitespace: true, removeComments:true}))
   .pipe(gulp.dest('./dist/'));
 
+const posts = () => gulp.src('./posts/*.html')
+  .pipe(htmlmin({collapseWhitespace: true, removeComments:true}))
+  .pipe(gulp.dest('./dist/posts/'));
+
 const styles = () => gulp.src('./css/*.css')
   .pipe(cleanCSS({debug: true, level: {1: {specialComments: 0}}}, (details) => {
     console.log(`${details.name}: ${details.stats.originalSize}`);
@@ -51,5 +55,5 @@ const main = () => gulp.src(['./js/custom/**'])
   .pipe(uglify())
   .pipe(gulp.dest('./dist/js/custom/'));
 
-const build = gulp.series(copyAll, copyFonts, html, copyOther, styles, min, main);
+const build = gulp.series(copyAll, copyFonts, html, posts, copyOther, styles, min, main);
 gulp.task('default', build);
